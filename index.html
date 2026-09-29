@@ -214,9 +214,11 @@ img{max-width:100%}
 .payment-bank{color:#1a1a2e; font-weight:700; font-size:.95rem; margin-bottom:8px}
 .payment-accname{color:#1a1a2e; font-weight:800; font-size:1.1rem; letter-spacing:.02em}
 .payment-accno{color:#1a1a2e; font-size:1.3rem; font-weight:800; margin-bottom:16px}
-.payment-qr-img{width:220px; height:220px; max-width:100%; display:block; margin:0 auto; border-radius:8px; background:#f3f4f6}
+.payment-qr-img{width:220px; height:220px; max-width:100%; display:block; margin:0 auto; border-radius:8px; background:#f3f4f6; object-fit:contain}
 .qr-fallback-btn{display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#fff; font-weight:700; font-size:.95rem; padding:14px 24px; border-radius:10px; text-decoration:none; margin:0 auto}
 .qr-fallback-hint{color:#6b7280; font-size:.82rem; margin-top:10px; max-width:280px; margin-left:auto; margin-right:auto; line-height:1.5}
+.qr-reload-btn{display:block; margin:10px auto 0; background:none; border:none; color:#6b7280; font-size:.82rem; text-decoration:underline; cursor:pointer; font-family:inherit}
+.qr-reload-btn:hover{color:#1a1a2e}
 .payment-amount{color:#1a1a2e; margin-top:16px; font-size:.95rem; font-weight:700}
 .paid-confirm-note{margin-top:16px; padding:28px 22px; border-radius:16px; background:#fff; text-align:center}
 .confirm-check{color:#DC2626; font-size:2.6rem; line-height:1; font-weight:800; margin:0 0 6px}
@@ -562,6 +564,7 @@ img{max-width:100%}
           <img id="paymentQr" class="payment-qr-img" alt="Mã QR chuyển khoản VietQR" src="">
           <a id="paymentQrFallback" class="qr-fallback-btn" href="#" target="_blank" rel="noopener" hidden>📷 Xem mã QR chuyển khoản</a>
           <p class="qr-fallback-hint" id="qrFallbackHint" hidden>Trình duyệt xem trước đang chặn hiển thị ảnh — bấm nút trên để mở mã QR ở tab mới rồi quét.</p>
+          <button type="button" id="reloadQrBtn" class="qr-reload-btn">🔄 Không thấy mã QR? Bấm tải lại</button>
           <p class="payment-amount" id="paymentAmount"></p>
         </div>
         <button type="button" id="confirmPaidBtn" class="btn btn-primary" style="margin-top:18px">Tôi Đã Chuyển Khoản</button>
@@ -674,13 +677,35 @@ img{max-width:100%}
   var paymentQr = document.getElementById("paymentQr");
   var paymentQrFallback = document.getElementById("paymentQrFallback");
   var qrFallbackHint = document.getElementById("qrFallbackHint");
+  var reloadQrBtn = document.getElementById("reloadQrBtn");
   var paymentAmount = document.getElementById("paymentAmount");
+  var lastQrBaseUrl = "";
+
+  function renderQrImage(baseUrl){
+    lastQrBaseUrl = baseUrl;
+    var freshUrl = baseUrl + "&t=" + Date.now(); // chống ảnh cũ bị cache lại
+    if (paymentQr){
+      paymentQr.hidden = false;
+      paymentQr.src = freshUrl;
+    }
+    if (paymentQrFallback){
+      paymentQrFallback.href = freshUrl;
+      paymentQrFallback.hidden = true;
+    }
+    if (qrFallbackHint) qrFallbackHint.hidden = true;
+  }
 
   if (paymentQr){
     paymentQr.addEventListener("error", function(){
       paymentQr.hidden = true;
       if (paymentQrFallback) paymentQrFallback.hidden = false;
       if (qrFallbackHint) qrFallbackHint.hidden = false;
+    });
+  }
+
+  if (reloadQrBtn){
+    reloadQrBtn.addEventListener("click", function(){
+      if (lastQrBaseUrl) renderQrImage(lastQrBaseUrl);
     });
   }
 
@@ -731,16 +756,8 @@ img{max-width:100%}
       if (msgEl){
         msgEl.textContent = "Cảm ơn " + (firstName || "bạn") + "! Bạn đã chọn " + pkgText + ". Quét mã QR bên dưới để chuyển khoản, sau đó bấm \"Tôi Đã Chuyển Khoản\".";
       }
-      var qrUrl = "https://img.vietqr.io/image/" + BANK_ID + "-" + BANK_ACCOUNT_NO + "-compact2.png?amount=" + amount + "&addInfo=" + encodeURIComponent(transferNote) + "&accountName=" + encodeURIComponent(BANK_ACCOUNT_NAME);
-      if (paymentQr){
-        paymentQr.hidden = false;
-        paymentQr.src = qrUrl;
-      }
-      if (paymentQrFallback){
-        paymentQrFallback.href = qrUrl;
-        paymentQrFallback.hidden = true;
-      }
-      if (qrFallbackHint) qrFallbackHint.hidden = true;
+      var qrUrl = "https://img.vietqr.io/image/" + BANK_ID + "-" + BANK_ACCOUNT_NO + "-qr_only.png?amount=" + amount + "&addInfo=" + encodeURIComponent(transferNote) + "&accountName=" + encodeURIComponent(BANK_ACCOUNT_NAME);
+      renderQrImage(qrUrl);
       if (paymentAmount){
         paymentAmount.textContent = "Số tiền: " + amount.toLocaleString("vi-VN") + "đ — Nội dung CK: " + transferNote;
       }
