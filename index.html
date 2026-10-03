@@ -164,12 +164,19 @@ img{max-width:100%}
 .social-links a:hover{text-decoration:underline}
 .social-links span{color:var(--border); margin:0 4px}
 
-/* testimonials */
-.testimonial-list{display:flex; flex-direction:column; gap:12px}
-.testimonial-card{padding:18px; background:var(--surface); border:1px solid var(--border); border-radius:12px}
-.quote{font-size:.97rem}
-.quote-name{margin-top:10px; font-size:.87rem; color:var(--fg-muted); font-weight:700}
-.placeholder-note{margin-top:14px; font-size:.88rem; color:var(--fg-muted); font-style:italic}
+/* testimonials slider */
+.testimonial-slider-wrap{position:relative; width:100%}
+.testimonial-list{display:flex; gap:16px; overflow-x:auto; padding-bottom:12px; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; scrollbar-width:thin}
+.testimonial-list::-webkit-scrollbar{height:6px}
+.testimonial-list::-webkit-scrollbar-track{background:var(--surface); border-radius:10px}
+.testimonial-list::-webkit-scrollbar-thumb{background:var(--border); border-radius:10px}
+.testimonial-card{flex:0 0 280px; width:280px; padding:14px; background:var(--surface); border:1px solid var(--border); border-radius:12px; display:flex; flex-direction:column; gap:10px; scroll-snap-align:start}
+.testimonial-img-thumb{width:100%; height:160px; border-radius:8px; overflow:hidden; border:1px solid var(--border); cursor:pointer; background:#111; display:flex; align-items:center; justify-content:center}
+.testimonial-img-thumb img{width:100%; height:100%; object-fit:cover; object-position:top; transition:transform 0.2s ease}
+.testimonial-img-thumb:hover img{transform:scale(1.04)}
+.quote{font-size:.9rem; line-height:1.45; flex-grow:1}
+.quote-name{font-size:.82rem; color:var(--fg-muted); font-weight:700}
+.placeholder-note{margin-top:10px; font-size:.84rem; color:var(--fg-muted); font-style:italic}
 
 /* checklist */
 .check-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:12px}
@@ -276,7 +283,7 @@ img{max-width:100%}
         <p class="hero-note">Khoá học dạng video, học theo tốc độ của riêng bạn.</p>
       </div>
       <div class="video-demo" style="padding:0; overflow:hidden">
-        <iframe style="width:100%; height:100%; border:0; display:block" src="https://www.youtube.com/embed/LybhOVdFt9o" title="Demo AI Edit Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe style="width:100%; height:100%; border:0; display:block" src="https://www.youtube.com/embed/ZpNcqbTOfcA" title="Demo AI Edit Video" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
     </div>
   </section>
@@ -286,11 +293,11 @@ img{max-width:100%}
       <p class="section-label">Vấn đề thực tế</p>
       <h2>Bạn có đang mất cả buổi chỉ để dựng một video?</h2>
       <div class="problem-list">
-        <div class="problem-card"><span class="mark mark-x">✕</span><p>Mỗi video mất vài tiếng chỉ để cắt ghép, chưa tính lên phụ đề và hiệu ứng.</p></div>
-        <div class="problem-card"><span class="mark mark-x">✕</span><p>Thuê editor riêng là chi phí cố định hàng tháng, kể cả tháng ít nội dung.</p></div>
-        <div class="problem-card"><span class="mark mark-x">✕</span><p>Muốn đăng nhiều video hơn để cạnh tranh nhưng quỹ thời gian không cho phép.</p></div>
-        <div class="problem-card"><span class="mark mark-x">✕</span><p>Tự học phần mềm dựng phim mất nhiều tháng mới quen tay.</p></div>
-        <div class="problem-card"><span class="mark mark-x">✕</span><p>Video đăng thất thường vì khâu edit luôn là nút thắt cuối cùng.</p></div>
+        <div class="problem-card"><span class="mark mark-x">✕</span><p>Mỗi video mất vài tiếng chỉ để cắt ghép, chưa tính lên phụ đề và&nbsp;hiệu&nbsp;ứng.</p></div>
+        <div class="problem-card"><span class="mark mark-x">✕</span><p>Thuê editor riêng là chi phí cố định hàng tháng, kể cả tháng ít&nbsp;nội&nbsp;dung.</p></div>
+        <div class="problem-card"><span class="mark mark-x">✕</span><p>Muốn đăng nhiều video hơn để cạnh tranh nhưng quỹ thời gian không&nbsp;cho&nbsp;phép.</p></div>
+        <div class="problem-card"><span class="mark mark-x">✕</span><p>Tự học phần mềm dựng phim mất nhiều tháng mới&nbsp;quen&nbsp;tay.</p></div>
+        <div class="problem-card"><span class="mark mark-x">✕</span><p>Video đăng thất thường vì khâu edit luôn là nút thắt&nbsp;cuối&nbsp;cùng.</p></div>
       </div>
     </div>
   </section>
@@ -442,11 +449,72 @@ img{max-width:100%}
       <p class="section-label">Học viên nói gì</p>
       <h2>Kết quả thật từ người học thật</h2>
       <div class="testimonial-list">
-        <div class="testimonial-card"><p class="quote">"[Trích dẫn phản hồi thật của học viên số 1]"</p><p class="quote-name">[Tên học viên] · [Công việc / kênh]</p></div>
-        <div class="testimonial-card"><p class="quote">"[Trích dẫn phản hồi thật của học viên số 2]"</p><p class="quote-name">[Tên học viên] · [Công việc / kênh]</p></div>
-        <div class="testimonial-card"><p class="quote">"[Trích dẫn phản hồi thật của học viên số 3]"</p><p class="quote-name">[Tên học viên] · [Công việc / kênh]</p></div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790686149108.png" target="_blank" data-feedback-zoom="images/feedback/media_1790686149108.png">
+            <img src="images/feedback/media_1790686149108.png" alt="Feedback Thùy Linh" loading="lazy">
+          </a>
+          <p class="quote">"Trước đây em nghĩ edit video bằng AI rất khó, nhưng nhờ hướng dẫn chi tiết nên em làm được ngay. Giờ em đã tự tin làm video cho shop của mình rồi."</p>
+          <p class="quote-name">Thùy Linh · Chủ Shop Online</p>
+        </div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790686149179.png" target="_blank" data-feedback-zoom="images/feedback/media_1790686149179.png">
+            <img src="images/feedback/media_1790686149179.png" alt="Feedback Minh Tuấn" loading="lazy">
+          </a>
+          <p class="quote">"Trước giờ em làm video toàn thủ công, mất cả tiếng đồng hồ. Giờ dùng AI thì chỉ mất vài phút là có video hoàn chỉnh. Mỗi bài đều có ví dụ cụ thể, làm theo là được!"</p>
+          <p class="quote-name">Minh Tuấn · Content Creator / TikToker</p>
+        </div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790686149208.jpg" target="_blank" data-feedback-zoom="images/feedback/media_1790686149208.jpg">
+            <img src="images/feedback/media_1790686149208.jpg" alt="Feedback Quang Huy" loading="lazy">
+          </a>
+          <p class="quote">"Cách anh hướng dẫn rất chi tiết, từ cơ bản đến nâng cao. Đặc biệt là phần dùng CapCut kết hợp AI để tự động dựng video, em áp dụng luôn cho kênh TikTok."</p>
+          <p class="quote-name">Quang Huy · Xây kênh TikTok</p>
+        </div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790687676753.png" target="_blank" data-feedback-zoom="images/feedback/media_1790687676753.png">
+            <img src="images/feedback/media_1790687676753.png" alt="Feedback Hoàng Nam" loading="lazy">
+          </a>
+          <p class="quote">"Mình đã áp dụng những gì học được trong khóa học để làm 2 video cho kênh TikTok rồi. Kết quả khá ổn, video lên được view tốt hơn mong đợi. Cảm ơn bạn vì khóa học rất thực tế!"</p>
+          <p class="quote-name">Hoàng Nam · Xây kênh TikTok</p>
+        </div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790687676804.png" target="_blank" data-feedback-zoom="images/feedback/media_1790687676804.png">
+            <img src="images/feedback/media_1790687676804.png" alt="Feedback Minh Khoa" loading="lazy">
+          </a>
+          <p class="quote">"Mình vừa xong khóa học rồi, phải nói thật là rất đáng tiền. Mình thích nhất là phần tạo Skill và phần tự động cắt khoảng lặng, chèn sub. Anh hướng dẫn dễ hiểu, có ví dụ thực tế."</p>
+          <p class="quote-name">Minh Khoa · Học viên khóa AI Video</p>
+        </div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790687722011.png" target="_blank" data-feedback-zoom="images/feedback/media_1790687722011.png">
+            <img src="images/feedback/media_1790687722011.png" alt="Feedback Văn Toàn, Hải Yến, Bác Bình, Thành" loading="lazy">
+          </a>
+          <p class="quote">"Sau khi học xong buổi 4, em đã làm được video hoàn chỉnh từ A-Z luôn. Thật sự rất bất ngờ vì AI giờ mạnh quá, chỉ cần vài thao tác là có ngay video chất lượng."</p>
+          <p class="quote-name">Văn Toàn & Nhóm Học viên (Hải Yến, Bác Bình, Thành)</p>
+        </div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790687722044.png" target="_blank" data-feedback-zoom="images/feedback/media_1790687722044.png">
+            <img src="images/feedback/media_1790687722044.png" alt="Feedback Đức Minh, Cô Mai, Phạm Quốc" loading="lazy">
+          </a>
+          <p class="quote">"Em là cô Mai (42 tuổi), lúc đầu ngại công nghệ nhưng học xong buổi 1 đã làm được video đăng kênh. Bác hướng dẫn rất tận tình, dễ hiểu và có tâm!"</p>
+          <p class="quote-name">Cô Mai, Đức Minh & Phạm Quốc</p>
+        </div>
+
+        <div class="testimonial-card">
+          <a class="testimonial-img-thumb" href="images/feedback/media_1790687722081.png" target="_blank" data-feedback-zoom="images/feedback/media_1790687722081.png">
+            <img src="images/feedback/media_1790687722081.png" alt="Feedback Hùng, Trần Văn Tùng, Lan Anh" loading="lazy">
+          </a>
+          <p class="quote">"Nội dung cực kỳ dễ hiểu, làm theo là được luôn. Trước đây edit thủ công mất cả tiếng, giờ nhờ AI chỉ cần vài thao tác là có video hoàn chỉnh, tiết kiệm ghê luôn."</p>
+          <p class="quote-name">Hùng, Trần Văn Tùng & Lan Anh</p>
+        </div>
+
       </div>
-      <p class="placeholder-note">Thay các mục trong [ ] bằng phản hồi thật từ học viên trước khi chia sẻ công khai trang này.</p>
     </div>
   </section>
 
@@ -525,7 +593,7 @@ img{max-width:100%}
           <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
         </div>
         <h2>Cam kết hoàn tiền 100%</h2>
-        <p class="guarantee-lead">Mình không hứa suông — mình đặt cược vào chính khoá học này.</p>
+        <p class="guarantee-lead">Mình hoàn toàn tự tin vào giá trị thực tế của khoá học — và bạn hoàn toàn không có rủi ro nào.</p>
         <p class="guarantee-body"><b>Hoàn tiền trong 3 ngày.</b> Trong vòng 3 ngày đầu tiên kể từ khi đăng ký, nếu bạn mới xem đến hết Chương 1 mà thấy khoá học chưa phù hợp với mình, chỉ cần nhắn yêu cầu hoàn tiền, mình hoàn lại đủ 100% học phí — áp dụng cho cả 2 gói.</p>
         <p class="guarantee-trust">Chương 1 đủ để bạn cảm nhận chất lượng — còn chưa hợp thì hoàn tiền ngay, không giữ chân ai.</p>
         <p class="guarantee-note">Yêu cầu hoàn tiền gửi trực tiếp qua Zalo/Messenger hoặc Facebook, trong thời hạn 3 ngày kể từ ngày đăng ký.</p>
@@ -882,6 +950,16 @@ var qrcode=function(){var t=function(t,r){var e=t,n=g[r],o=null,i=0,a=null,u=[],
     if (zoomBtn) zoomBtn.focus();
   }
   if (zoomBtn) zoomBtn.addEventListener("click", openLightbox);
+  document.querySelectorAll("[data-feedback-zoom]").forEach(function(el){
+    el.addEventListener("click", function(e){
+      e.preventDefault();
+      if (!lightbox || !lightboxImg) return;
+      lightboxImg.src = el.getAttribute("href") || el.getAttribute("data-feedback-zoom");
+      lightbox.hidden = false;
+      document.body.style.overflow = "hidden";
+      if (lightboxCloseBtn) lightboxCloseBtn.focus();
+    });
+  });
   if (lightboxCloseBtn) lightboxCloseBtn.addEventListener("click", closeLightbox);
   if (lightbox){
     lightbox.addEventListener("click", function(e){
